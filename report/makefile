@@ -10,6 +10,7 @@ draw_target = $(draw_src:./figure/%.draw.svg=./figure/%.draw.png)
 #https://unix.stackexchange.com/questions/140912/no-target-error-using-make
 
 
+<<<<<<< HEAD
 # Need install "latex" and "texlive-bibtex-extra"
 ./$(OUT_DIR)/$(SOURCE).aux: *.tex ./texContent/* $(draw_target) makefile
 	if [ ! -d "temp/" ]; then mkdir temp;  mkdir temp/texContent; fi
@@ -17,12 +18,20 @@ draw_target = $(draw_src:./figure/%.draw.svg=./figure/%.draw.png)
 	bibtex ./$(OUT_DIR)/$(SOURCE)
 # https://www.dickimaw-books.com/software/bib2gls/
 # bug need java
+=======
+./$(OUT_DIR)/$(SOURCE).aux: *.tex ./texContent/* $(draw_target) makefile
+	$(LATEX_CMD)
+	bibtex ./$(OUT_DIR)/$(SOURCE)
+>>>>>>> 628323b (Import files from previous MCSE projects)
 	bib2gls ./$(OUT_DIR)/$(SOURCE)
 #	$(LATEX_CMD)
 #	$(LATEX_CMD)
 	mv ./temp/main.pdf ./$(PRJ_NAME).pdf
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 628323b (Import files from previous MCSE projects)
 # generate png from svg
 #	Input svg file, <name>.draw.svg
 #	Output png file, <name>.draw.png
@@ -36,3 +45,7 @@ reset:
 	make clean
 	rm -f $(SOURCE).pdf
 	rm -R -f temp
+<<<<<<< HEAD
+=======
+	mkdir temp
+>>>>>>> 628323b (Import files from previous MCSE projects)

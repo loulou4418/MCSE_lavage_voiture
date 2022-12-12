@@ -38,5 +38,5 @@ reset:
 
 # Copy the current version of the report at the root of the project
 release:
-	if [ ! -d "./$(PRJ_NAME).pdf" ]; then make; fi
-	if [ ! -d "../$(PRJ_NAME).pdf" ]; then cp ./$(PRJ_NAME).pdf ../; fi
+	make
+	cp -f ./$(PRJ_NAME).pdf ../

@@ -6,7 +6,10 @@ Il s'agit dans cette partie de caractériser l'environnement c'est-à-dire de d'
 L'environnement du circuit à concevoir est constitué de N entités :
 
 \begin{itemize}
-	\item a
+	\item Utilisateur
+	\item Portique
+	\item Rouleau
+	\item Tube apport
 	
 \end{itemize}
 
@@ -32,27 +35,26 @@ Pour clarifier la méthode et mieux regrouper les entrées/sorties selon leur co
 	\label{fig:decomp_entities}
 \end{figure}
 
-\newpage
-
 Le tableau ci-dessous récapitule les relations avec leur sens, leur catégorie et leur type.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|}
 		\hline
-		Entités                       & Relation  & Catégorie    & Sens   & Type           \\
+		Entités                       & Relation  	  & Catégorie    & Sens   	& Type       \\
 		\hline
-		Utilisateur                   & TypeLavage  & Permanent    & Entrée   & DefLavage  \\
+		Utilisateur                   & TypeLavage    & Permanent    & Entrée   & DefLavage  \\
+									  & Etat    	  & Evenement    & Entrée   & DefEtat \\
 		\hline
-		Portique                      & MvH  & Permanent    & Sortie   & DefMv             \\
-									  & PosH  & Permanent    & Entrée   & DefPos           \\
-									  & DistVehicule  & Permanent    & Entrée   & DefPos   \\
+		Portique                      & MvH  		  & Permanent    & Sortie   & DefMv      \\
+									  & PosH  		  & Permanent    & Entrée   & DefPos     \\
+									  & DistVehicule  & Permanent    & Entrée   & DefPos   	 \\
 		\hline
-		Rouleau                       & MvV  & Permanent    & Sortie   & DefMv             \\
-									  & PosV  & Permanent    & Entrée   & DefPos           \\
-									  & MvR  & Permanent    & Sortie   & DefRot            \\
+		Rouleau                       & MvV  		  & Permanent    & Sortie   & DefMv      \\
+									  & PosV  		  & Permanent    & Entrée   & DefPos     \\
+									  & MvR  		  & Permanent    & Sortie   & DefRot     \\
     	\hline
-		Tube apport                   & Flux  & Permanent    & Sortie   & DefFlux          \\
+		Tube apport                   & Flux  		  & Permanent    & Sortie   & DefFlux    \\
 		\hline
 	\end{tabular}
 	\caption{Sens et rôle des signaux}
@@ -61,6 +63,9 @@ Le tableau ci-dessous récapitule les relations avec leur sens, leur catégorie 
 
 Les différents types définis dans le tableau \ref{tab:entrees_sorties_composant} sont spécifiques à l'application.
 Ils permettent de regrouper les informations essentielles qui doivent être échangées entre les entités et notre système.
+
+\textbf{DefEtat} permet de définir l'état de marche du système.
+Deux états sont possibles et dépendent de l'entité utilisateur: "Marche" et "Arrêt".
 
 \textbf{DefLavage} permet de définir le type de lavage lancé par l'utilisateur.
 Il y a deux choix possibles: "Eau" ou "Produit". 
@@ -79,7 +84,28 @@ C'est un choix binaire entre: "Arrêté" et "Rotation".
 \textbf{DefFlux} définit l'apport d'un élément par le tube d'apport.
 C'est un choix entre: "Eau", "Produit" et "Air".
 
-\newpage
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		Nom de la relation         & Type de données  & Plage de valeurs \\
+		\hline
+		DefEtat                    & Enumération  	  & {Marche, Arrêt} \\
+		\hline
+		DefLavage                  & Enumération  	  & {Eau, Produit} \\
+		\hline
+		DefMv                      & Décimale  		  & -1 ... 1 m/s \\
+		\hline
+		DefPos                     & Décimale  		  & 0 ... 10 m  \\
+    	\hline
+		DefRot                     & Enumération  	  & {Rotation, Arrêté} \\
+		\hline
+		DefFlux                    & Enumération  	  & {Eau, Produit, Air, Aucun} \\
+		\hline
+	\end{tabular}
+	\caption{Sens et rôle des signaux}
+	\label{tab:types_fonc}
+\end{table}
 
 \subsection{Spécifications fonctionnelles}
 Les spécifications fonctionnelles comprennent la liste des fonctions du système
@@ -88,6 +114,20 @@ de l'environnement pour ces fonctions \cite{Calvez_2}.
 
 \gap
 
+Le système à concevoir interagit avec quatre entités, comme présenté plus haut.
+L'entité utilisateur configure notre système en définissant le type de lavage et son état de marche.
+
+Ainsi, le comportement de l'entité Utilisateur peut être présenté comme ci-dessous. 
+La figure suivante illustre alors l'évolution de l'entité en mettant en évidence les cycles caractéristiques de fonctionnement :
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{spec_utilisateur.drawio.png}
+	\caption{Comportement de l'entité Utilisateur (A MODIFIER)}
+	\label{fig:spec_utilisateur}
+\end{figure}
+
+En effet, l'utilisateur peut activer et configurer le système sans ordre particulier, comme illustré.
 
 \subsection{Spécifications opératoires}
 \subsection{Spécifications technologiques}
